@@ -66,7 +66,7 @@ String:  "SIG:" + <Data> + "\n"
   - Note: Import does not perform cryptographic verification because the message is not part of the exported data.
 
 - On verification:
-  - Ensure the provided `KeyID` for provided <PrivateKey> equals `KeyID` from the signature (mismatch → invalid).
+  - Ensure the provided `KeyID` for provided <PublicKey> equals `KeyID` from the signature (mismatch → invalid).
   - Verify Ed25519 signature: `Ed25519_Verify(<PublicKey>, SHA512(<Message>), <Signature>)` must be valid.
   
 Notes:
