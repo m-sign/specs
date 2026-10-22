@@ -1,0 +1,564 @@
+{
+  "accepted_variants": [
+    {
+      "canonical": "KEY:Aef8KiD8bThuQYp3yj8fa9UXgTjCrsEPBmI-fdmdzJqFOG66u2Jt7-2W9v8CBoVotJnc96GlXwmXEoTTXEV2KXW1J-ywL3e6Xd9vMV8\n",
+      "input": "KEY:Aef8KiD8bThuQYp3yj8fa9UXgTjCrsEPBmI-fdmdzJqFOG66u2Jt7-2W9v8CBoVotJnc96GlXwmXEoTTXEV2KXW1J-ywL3e6Xd9vMV8\r\n",
+      "name": "key-crlf",
+      "type": "key"
+    },
+    {
+      "canonical": "KEY:Aef8KiD8bThuQYp3yj8fa9UXgTjCrsEPBmI-fdmdzJqFOG66u2Jt7-2W9v8CBoVotJnc96GlXwmXEoTTXEV2KXW1J-ywL3e6Xd9vMV8\n",
+      "input": "KEY:Aef8KiD8bThuQYp3yj8fa9UXgTjCrsEPBmI-fdmdzJqFOG66u2Jt7-2W9v8CBoVotJnc96GlXwmXEoTTXEV2KXW1J-ywL3e6Xd9vMV8",
+      "name": "key-no-eol",
+      "type": "key"
+    },
+    {
+      "canonical": "PUB:AThuQYp3ygaFaLSZ3PehpV8JlxKE01xFdil1tSfssC93ul3fbzFf\n",
+      "input": "PUB:AThuQYp3ygaFaLSZ3PehpV8JlxKE01xFdil1tSfssC93ul3fbzFf\r\n",
+      "name": "pub-crlf",
+      "type": "pub"
+    },
+    {
+      "canonical": "PUB:AThuQYp3ygaFaLSZ3PehpV8JlxKE01xFdil1tSfssC93ul3fbzFf\n",
+      "input": "PUB:AThuQYp3ygaFaLSZ3PehpV8JlxKE01xFdil1tSfssC93ul3fbzFf",
+      "name": "pub-no-eol",
+      "type": "pub"
+    },
+    {
+      "canonical": "SIG:AfX-JaGE2ThuQYp3yj5lhD628lINWXhOy0FW3EH4fFxe75_vO5ikhMY1JJdnDiOJoUcg7R5-yD1cRza8jR3g-A6dB1jNUVTQSwaopQk\n",
+      "input": "SIG:AfX-JaGE2ThuQYp3yj5lhD628lINWXhOy0FW3EH4fFxe75_vO5ikhMY1JJdnDiOJoUcg7R5-yD1cRza8jR3g-A6dB1jNUVTQSwaopQk\r\n",
+      "name": "sig-crlf",
+      "type": "sig"
+    },
+    {
+      "canonical": "SIG:AfX-JaGE2ThuQYp3yj5lhD628lINWXhOy0FW3EH4fFxe75_vO5ikhMY1JJdnDiOJoUcg7R5-yD1cRza8jR3g-A6dB1jNUVTQSwaopQk\n",
+      "input": "SIG:AfX-JaGE2ThuQYp3yj5lhD628lINWXhOy0FW3EH4fFxe75_vO5ikhMY1JJdnDiOJoUcg7R5-yD1cRza8jR3g-A6dB1jNUVTQSwaopQk",
+      "name": "sig-no-eol",
+      "type": "sig"
+    }
+  ],
+  "description": "m-sign v1 data format test vectors. All keys are published test keys: never use them for real signing.",
+  "format_version": 1,
+  "invalid": [
+    {
+      "comment": "empty input",
+      "error": "format",
+      "input": "",
+      "name": "key-empty",
+      "type": "key"
+    },
+    {
+      "comment": "no data after the prefix",
+      "error": "format",
+      "input": "KEY:\n",
+      "name": "key-prefix-only",
+      "type": "key"
+    },
+    {
+      "comment": "prefix of another item type",
+      "error": "format",
+      "input": "PUB:Aef8KiD8bThuQYp3yj8fa9UXgTjCrsEPBmI-fdmdzJqFOG66u2Jt7-2W9v8CBoVotJnc96GlXwmXEoTTXEV2KXW1J-ywL3e6Xd9vMV8\n",
+      "name": "key-wrong-prefix",
+      "type": "key"
+    },
+    {
+      "comment": "prefixes are case-sensitive",
+      "error": "format",
+      "input": "key:Aef8KiD8bThuQYp3yj8fa9UXgTjCrsEPBmI-fdmdzJqFOG66u2Jt7-2W9v8CBoVotJnc96GlXwmXEoTTXEV2KXW1J-ywL3e6Xd9vMV8\n",
+      "name": "key-lowercase-prefix",
+      "type": "key"
+    },
+    {
+      "comment": "prefix without the colon",
+      "error": "format",
+      "input": "KEYAef8KiD8bThuQYp3yj8fa9UXgTjCrsEPBmI-fdmdzJqFOG66u2Jt7-2W9v8CBoVotJnc96GlXwmXEoTTXEV2KXW1J-ywL3e6Xd9vMV8\n",
+      "name": "key-missing-colon",
+      "type": "key"
+    },
+    {
+      "comment": "whitespace before the prefix",
+      "error": "format",
+      "input": " KEY:Aef8KiD8bThuQYp3yj8fa9UXgTjCrsEPBmI-fdmdzJqFOG66u2Jt7-2W9v8CBoVotJnc96GlXwmXEoTTXEV2KXW1J-ywL3e6Xd9vMV8\n",
+      "name": "key-leading-space",
+      "type": "key"
+    },
+    {
+      "comment": "UTF-8 byte order mark before the prefix",
+      "error": "format",
+      "input": "\ufeffKEY:Aef8KiD8bThuQYp3yj8fa9UXgTjCrsEPBmI-fdmdzJqFOG66u2Jt7-2W9v8CBoVotJnc96GlXwmXEoTTXEV2KXW1J-ywL3e6Xd9vMV8\n",
+      "name": "key-leading-bom",
+      "type": "key"
+    },
+    {
+      "comment": "base64 padding is not allowed",
+      "error": "format",
+      "input": "KEY:Aef8KiD8bThuQYp3yj8fa9UXgTjCrsEPBmI-fdmdzJqFOG66u2Jt7-2W9v8CBoVotJnc96GlXwmXEoTTXEV2KXW1J-ywL3e6Xd9vMV8=\n",
+      "name": "key-padding",
+      "type": "key"
+    },
+    {
+      "comment": "standard base64 '+' instead of '-'",
+      "error": "format",
+      "input": "KEY:+ef8KiD8bThuQYp3yj8fa9UXgTjCrsEPBmI-fdmdzJqFOG66u2Jt7-2W9v8CBoVotJnc96GlXwmXEoTTXEV2KXW1J-ywL3e6Xd9vMV8\n",
+      "name": "key-plus-char",
+      "type": "key"
+    },
+    {
+      "comment": "standard base64 '/' instead of '_'",
+      "error": "format",
+      "input": "KEY:/ef8KiD8bThuQYp3yj8fa9UXgTjCrsEPBmI-fdmdzJqFOG66u2Jt7-2W9v8CBoVotJnc96GlXwmXEoTTXEV2KXW1J-ywL3e6Xd9vMV8\n",
+      "name": "key-slash-char",
+      "type": "key"
+    },
+    {
+      "comment": "space inside the data",
+      "error": "format",
+      "input": "KEY:Aef8KiD8bT huQYp3yj8fa9UXgTjCrsEPBmI-fdmdzJqFOG66u2Jt7-2W9v8CBoVotJnc96GlXwmXEoTTXEV2KXW1J-ywL3e6Xd9vMV8\n",
+      "name": "key-space-inside",
+      "type": "key"
+    },
+    {
+      "comment": "CR inside the data",
+      "error": "format",
+      "input": "KEY:Aef8KiD8bT\rhuQYp3yj8fa9UXgTjCrsEPBmI-fdmdzJqFOG66u2Jt7-2W9v8CBoVotJnc96GlXwmXEoTTXEV2KXW1J-ywL3e6Xd9vMV8\n",
+      "name": "key-cr-inside",
+      "type": "key"
+    },
+    {
+      "comment": "version byte 0x00 (the version byte is not covered by Check)",
+      "error": "unsupported_version",
+      "input": "KEY:AOf8KiD8bThuQYp3yj8fa9UXgTjCrsEPBmI-fdmdzJqFOG66u2Jt7-2W9v8CBoVotJnc96GlXwmXEoTTXEV2KXW1J-ywL3e6Xd9vMV8\n",
+      "name": "key-version-00",
+      "type": "key"
+    },
+    {
+      "comment": "version byte 0x02 (the version byte is not covered by Check)",
+      "error": "unsupported_version",
+      "input": "KEY:Auf8KiD8bThuQYp3yj8fa9UXgTjCrsEPBmI-fdmdzJqFOG66u2Jt7-2W9v8CBoVotJnc96GlXwmXEoTTXEV2KXW1J-ywL3e6Xd9vMV8\n",
+      "name": "key-version-02",
+      "type": "key"
+    },
+    {
+      "comment": "payload one byte short (Check recomputed)",
+      "error": "format",
+      "input": "KEY:AYoZtfK_dThuQYp3yj8fa9UXgTjCrsEPBmI-fdmdzJqFOG66u2Jt7-2W9v8CBoVotJnc96GlXwmXEoTTXEV2KXW1J-ywL3e6Xd9vMQ\n",
+      "name": "key-truncated",
+      "type": "key"
+    },
+    {
+      "comment": "payload one byte long (Check recomputed)",
+      "error": "format",
+      "input": "KEY:AcoOeR3bujhuQYp3yj8fa9UXgTjCrsEPBmI-fdmdzJqFOG66u2Jt7-2W9v8CBoVotJnc96GlXwmXEoTTXEV2KXW1J-ywL3e6Xd9vMV8A\n",
+      "name": "key-extended",
+      "type": "key"
+    },
+    {
+      "comment": "empty input",
+      "error": "format",
+      "input": "",
+      "name": "pub-empty",
+      "type": "pub"
+    },
+    {
+      "comment": "no data after the prefix",
+      "error": "format",
+      "input": "PUB:\n",
+      "name": "pub-prefix-only",
+      "type": "pub"
+    },
+    {
+      "comment": "prefix of another item type",
+      "error": "format",
+      "input": "SIG:AThuQYp3ygaFaLSZ3PehpV8JlxKE01xFdil1tSfssC93ul3fbzFf\n",
+      "name": "pub-wrong-prefix",
+      "type": "pub"
+    },
+    {
+      "comment": "prefixes are case-sensitive",
+      "error": "format",
+      "input": "pub:AThuQYp3ygaFaLSZ3PehpV8JlxKE01xFdil1tSfssC93ul3fbzFf\n",
+      "name": "pub-lowercase-prefix",
+      "type": "pub"
+    },
+    {
+      "comment": "prefix without the colon",
+      "error": "format",
+      "input": "PUBAThuQYp3ygaFaLSZ3PehpV8JlxKE01xFdil1tSfssC93ul3fbzFf\n",
+      "name": "pub-missing-colon",
+      "type": "pub"
+    },
+    {
+      "comment": "whitespace before the prefix",
+      "error": "format",
+      "input": " PUB:AThuQYp3ygaFaLSZ3PehpV8JlxKE01xFdil1tSfssC93ul3fbzFf\n",
+      "name": "pub-leading-space",
+      "type": "pub"
+    },
+    {
+      "comment": "UTF-8 byte order mark before the prefix",
+      "error": "format",
+      "input": "\ufeffPUB:AThuQYp3ygaFaLSZ3PehpV8JlxKE01xFdil1tSfssC93ul3fbzFf\n",
+      "name": "pub-leading-bom",
+      "type": "pub"
+    },
+    {
+      "comment": "base64 padding is not allowed",
+      "error": "format",
+      "input": "PUB:AThuQYp3ygaFaLSZ3PehpV8JlxKE01xFdil1tSfssC93ul3fbzFf=\n",
+      "name": "pub-padding",
+      "type": "pub"
+    },
+    {
+      "comment": "standard base64 '+' instead of '-'",
+      "error": "format",
+      "input": "PUB:+ThuQYp3ygaFaLSZ3PehpV8JlxKE01xFdil1tSfssC93ul3fbzFf\n",
+      "name": "pub-plus-char",
+      "type": "pub"
+    },
+    {
+      "comment": "standard base64 '/' instead of '_'",
+      "error": "format",
+      "input": "PUB:/ThuQYp3ygaFaLSZ3PehpV8JlxKE01xFdil1tSfssC93ul3fbzFf\n",
+      "name": "pub-slash-char",
+      "type": "pub"
+    },
+    {
+      "comment": "space inside the data",
+      "error": "format",
+      "input": "PUB:AThuQYp3yg aFaLSZ3PehpV8JlxKE01xFdil1tSfssC93ul3fbzFf\n",
+      "name": "pub-space-inside",
+      "type": "pub"
+    },
+    {
+      "comment": "CR inside the data",
+      "error": "format",
+      "input": "PUB:AThuQYp3yg\raFaLSZ3PehpV8JlxKE01xFdil1tSfssC93ul3fbzFf\n",
+      "name": "pub-cr-inside",
+      "type": "pub"
+    },
+    {
+      "comment": "version byte 0x00 (the version byte is not covered by Check)",
+      "error": "unsupported_version",
+      "input": "PUB:ADhuQYp3ygaFaLSZ3PehpV8JlxKE01xFdil1tSfssC93ul3fbzFf\n",
+      "name": "pub-version-00",
+      "type": "pub"
+    },
+    {
+      "comment": "version byte 0x02 (the version byte is not covered by Check)",
+      "error": "unsupported_version",
+      "input": "PUB:AjhuQYp3ygaFaLSZ3PehpV8JlxKE01xFdil1tSfssC93ul3fbzFf\n",
+      "name": "pub-version-02",
+      "type": "pub"
+    },
+    {
+      "comment": "payload one byte short",
+      "error": "format",
+      "input": "PUB:AThuQYp3ygaFaLSZ3PehpV8JlxKE01xFdil1tSfssC93ul3fbzE\n",
+      "name": "pub-truncated",
+      "type": "pub"
+    },
+    {
+      "comment": "payload one byte long",
+      "error": "format",
+      "input": "PUB:AThuQYp3ygaFaLSZ3PehpV8JlxKE01xFdil1tSfssC93ul3fbzFfAA\n",
+      "name": "pub-extended",
+      "type": "pub"
+    },
+    {
+      "comment": "empty input",
+      "error": "format",
+      "input": "",
+      "name": "sig-empty",
+      "type": "sig"
+    },
+    {
+      "comment": "no data after the prefix",
+      "error": "format",
+      "input": "SIG:\n",
+      "name": "sig-prefix-only",
+      "type": "sig"
+    },
+    {
+      "comment": "prefix of another item type",
+      "error": "format",
+      "input": "KEY:AfX-JaGE2ThuQYp3yj5lhD628lINWXhOy0FW3EH4fFxe75_vO5ikhMY1JJdnDiOJoUcg7R5-yD1cRza8jR3g-A6dB1jNUVTQSwaopQk\n",
+      "name": "sig-wrong-prefix",
+      "type": "sig"
+    },
+    {
+      "comment": "prefixes are case-sensitive",
+      "error": "format",
+      "input": "sig:AfX-JaGE2ThuQYp3yj5lhD628lINWXhOy0FW3EH4fFxe75_vO5ikhMY1JJdnDiOJoUcg7R5-yD1cRza8jR3g-A6dB1jNUVTQSwaopQk\n",
+      "name": "sig-lowercase-prefix",
+      "type": "sig"
+    },
+    {
+      "comment": "prefix without the colon",
+      "error": "format",
+      "input": "SIGAfX-JaGE2ThuQYp3yj5lhD628lINWXhOy0FW3EH4fFxe75_vO5ikhMY1JJdnDiOJoUcg7R5-yD1cRza8jR3g-A6dB1jNUVTQSwaopQk\n",
+      "name": "sig-missing-colon",
+      "type": "sig"
+    },
+    {
+      "comment": "whitespace before the prefix",
+      "error": "format",
+      "input": " SIG:AfX-JaGE2ThuQYp3yj5lhD628lINWXhOy0FW3EH4fFxe75_vO5ikhMY1JJdnDiOJoUcg7R5-yD1cRza8jR3g-A6dB1jNUVTQSwaopQk\n",
+      "name": "sig-leading-space",
+      "type": "sig"
+    },
+    {
+      "comment": "UTF-8 byte order mark before the prefix",
+      "error": "format",
+      "input": "\ufeffSIG:AfX-JaGE2ThuQYp3yj5lhD628lINWXhOy0FW3EH4fFxe75_vO5ikhMY1JJdnDiOJoUcg7R5-yD1cRza8jR3g-A6dB1jNUVTQSwaopQk\n",
+      "name": "sig-leading-bom",
+      "type": "sig"
+    },
+    {
+      "comment": "base64 padding is not allowed",
+      "error": "format",
+      "input": "SIG:AfX-JaGE2ThuQYp3yj5lhD628lINWXhOy0FW3EH4fFxe75_vO5ikhMY1JJdnDiOJoUcg7R5-yD1cRza8jR3g-A6dB1jNUVTQSwaopQk=\n",
+      "name": "sig-padding",
+      "type": "sig"
+    },
+    {
+      "comment": "standard base64 '+' instead of '-'",
+      "error": "format",
+      "input": "SIG:+fX-JaGE2ThuQYp3yj5lhD628lINWXhOy0FW3EH4fFxe75_vO5ikhMY1JJdnDiOJoUcg7R5-yD1cRza8jR3g-A6dB1jNUVTQSwaopQk\n",
+      "name": "sig-plus-char",
+      "type": "sig"
+    },
+    {
+      "comment": "standard base64 '/' instead of '_'",
+      "error": "format",
+      "input": "SIG:/fX-JaGE2ThuQYp3yj5lhD628lINWXhOy0FW3EH4fFxe75_vO5ikhMY1JJdnDiOJoUcg7R5-yD1cRza8jR3g-A6dB1jNUVTQSwaopQk\n",
+      "name": "sig-slash-char",
+      "type": "sig"
+    },
+    {
+      "comment": "space inside the data",
+      "error": "format",
+      "input": "SIG:AfX-JaGE2T huQYp3yj5lhD628lINWXhOy0FW3EH4fFxe75_vO5ikhMY1JJdnDiOJoUcg7R5-yD1cRza8jR3g-A6dB1jNUVTQSwaopQk\n",
+      "name": "sig-space-inside",
+      "type": "sig"
+    },
+    {
+      "comment": "CR inside the data",
+      "error": "format",
+      "input": "SIG:AfX-JaGE2T\rhuQYp3yj5lhD628lINWXhOy0FW3EH4fFxe75_vO5ikhMY1JJdnDiOJoUcg7R5-yD1cRza8jR3g-A6dB1jNUVTQSwaopQk\n",
+      "name": "sig-cr-inside",
+      "type": "sig"
+    },
+    {
+      "comment": "version byte 0x00 (the version byte is not covered by Check)",
+      "error": "unsupported_version",
+      "input": "SIG:APX-JaGE2ThuQYp3yj5lhD628lINWXhOy0FW3EH4fFxe75_vO5ikhMY1JJdnDiOJoUcg7R5-yD1cRza8jR3g-A6dB1jNUVTQSwaopQk\n",
+      "name": "sig-version-00",
+      "type": "sig"
+    },
+    {
+      "comment": "version byte 0x02 (the version byte is not covered by Check)",
+      "error": "unsupported_version",
+      "input": "SIG:AvX-JaGE2ThuQYp3yj5lhD628lINWXhOy0FW3EH4fFxe75_vO5ikhMY1JJdnDiOJoUcg7R5-yD1cRza8jR3g-A6dB1jNUVTQSwaopQk\n",
+      "name": "sig-version-02",
+      "type": "sig"
+    },
+    {
+      "comment": "payload one byte short (Check recomputed)",
+      "error": "format",
+      "input": "SIG:AXk1uuIAMzhuQYp3yj5lhD628lINWXhOy0FW3EH4fFxe75_vO5ikhMY1JJdnDiOJoUcg7R5-yD1cRza8jR3g-A6dB1jNUVTQSwaopQ\n",
+      "name": "sig-truncated",
+      "type": "sig"
+    },
+    {
+      "comment": "payload one byte long (Check recomputed)",
+      "error": "format",
+      "input": "SIG:AVTgaHtFJzhuQYp3yj5lhD628lINWXhOy0FW3EH4fFxe75_vO5ikhMY1JJdnDiOJoUcg7R5-yD1cRza8jR3g-A6dB1jNUVTQSwaopQkA\n",
+      "name": "sig-extended",
+      "type": "sig"
+    },
+    {
+      "comment": "unused bits of the last char are not zero",
+      "error": "format",
+      "input": "KEY:Aef8KiD8bThuQYp3yj8fa9UXgTjCrsEPBmI-fdmdzJqFOG66u2Jt7-2W9v8CBoVotJnc96GlXwmXEoTTXEV2KXW1J-ywL3e6Xd9vMV9\n",
+      "name": "key-noncanonical-last-char",
+      "type": "key"
+    },
+    {
+      "comment": "unused bits of the last char are not zero",
+      "error": "format",
+      "input": "SIG:AfX-JaGE2ThuQYp3yj5lhD628lINWXhOy0FW3EH4fFxe75_vO5ikhMY1JJdnDiOJoUcg7R5-yD1cRza8jR3g-A6dB1jNUVTQSwaopQl\n",
+      "name": "sig-noncanonical-last-char",
+      "type": "sig"
+    },
+    {
+      "comment": "one bit of Check flipped",
+      "error": "format",
+      "input": "KEY:Aeb8KiD8bThuQYp3yj8fa9UXgTjCrsEPBmI-fdmdzJqFOG66u2Jt7-2W9v8CBoVotJnc96GlXwmXEoTTXEV2KXW1J-ywL3e6Xd9vMV8\n",
+      "name": "key-bad-check",
+      "type": "key"
+    },
+    {
+      "comment": "one bit of Check flipped",
+      "error": "format",
+      "input": "SIG:AfT-JaGE2ThuQYp3yj5lhD628lINWXhOy0FW3EH4fFxe75_vO5ikhMY1JJdnDiOJoUcg7R5-yD1cRza8jR3g-A6dB1jNUVTQSwaopQk\n",
+      "name": "sig-bad-check",
+      "type": "sig"
+    },
+    {
+      "comment": "one bit of KeyID flipped",
+      "error": "format",
+      "input": "PUB:ATluQYp3ygaFaLSZ3PehpV8JlxKE01xFdil1tSfssC93ul3fbzFf\n",
+      "name": "pub-key-id-mismatch",
+      "type": "pub"
+    },
+    {
+      "comment": "KeyID is not SHA-256(PublicKey)[0:6] (Check recomputed)",
+      "error": "format",
+      "input": "KEY:AfmtEXe_dzluQYp3yj8fa9UXgTjCrsEPBmI-fdmdzJqFOG66u2Jt7-2W9v8CBoVotJnc96GlXwmXEoTTXEV2KXW1J-ywL3e6Xd9vMV8\n",
+      "name": "key-key-id-mismatch",
+      "type": "key"
+    },
+    {
+      "comment": "PublicKey is not derived from Seed (KeyID and Check recomputed)",
+      "error": "format",
+      "input": "KEY:AUTs_1SO9yH-Md-hVD8fa9UXgTjCrsEPBmI-fdmdzJqFOG66u2Jt7-2W9v8C11qYAYKxCrfVS_7TyWQHOg7hcvPapiMlrwIaaPcHURo\n",
+      "name": "key-public-half-mismatch",
+      "type": "key"
+    }
+  ],
+  "keys": [
+    {
+      "key": "KEY:Aef8KiD8bThuQYp3yj8fa9UXgTjCrsEPBmI-fdmdzJqFOG66u2Jt7-2W9v8CBoVotJnc96GlXwmXEoTTXEV2KXW1J-ywL3e6Xd9vMV8\n",
+      "key_id_hex": "386e418a77ca",
+      "name": "kat-a",
+      "pub": "PUB:AThuQYp3ygaFaLSZ3PehpV8JlxKE01xFdil1tSfssC93ul3fbzFf\n",
+      "public_key_hex": "068568b499dcf7a1a55f09971284d35c45762975b527ecb02f77ba5ddf6f315f",
+      "seed_hex": "3f1f6bd5178138c2aec10f06623e7dd99dcc9a85386ebabb626defed96f6ff02"
+    },
+    {
+      "key": "KEY:AQeHdYFKuyH-Md-hVJ1hsZ3v_VpguoRK9JLsLMREScVpezJpGXA7rAMcrn9g11qYAYKxCrfVS_7TyWQHOg7hcvPapiMlrwIaaPcHURo\n",
+      "key_id_hex": "21fe31dfa154",
+      "name": "kat-b",
+      "pub": "PUB:ASH-Md-hVNdamAGCsQq31Uv-08lkBzoO4XLz2qYjJa8CGmj3B1Ea\n",
+      "public_key_hex": "d75a980182b10ab7d54bfed3c964073a0ee172f3daa62325af021a68f707511a",
+      "seed_hex": "9d61b19deffd5a60ba844af492ec2cc44449c5697b326919703bac031cae7f60"
+    },
+    {
+      "key": "KEY:AZzgcWF76lZHWqdUYwABAgMEBQYHCAkKCwwNDg8QERITFBUWFxgZGhscHR4fA6EHv_POEL4dcN0Y50vAmWfk1jCbpQ1fHdyGZBJVMbg\n",
+      "key_id_hex": "56475aa75463",
+      "name": "kat-c",
+      "pub": "PUB:AVZHWqdUYwOhB7_zzhC-HXDdGOdLwJln5NYwm6UNXx3chmQSVTG4\n",
+      "public_key_hex": "03a107bff3ce10be1d70dd18e74bc09967e4d6309ba50d5f1ddc8664125531b8",
+      "seed_hex": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f"
+    }
+  ],
+  "signatures": [
+    {
+      "key": "kat-a",
+      "message_hex": "",
+      "name": "kat-a-empty",
+      "sig": "SIG:AfX-JaGE2ThuQYp3yj5lhD628lINWXhOy0FW3EH4fFxe75_vO5ikhMY1JJdnDiOJoUcg7R5-yD1cRza8jR3g-A6dB1jNUVTQSwaopQk\n"
+    },
+    {
+      "key": "kat-a",
+      "message_hex": "616263",
+      "name": "kat-a-abc",
+      "sig": "SIG:ATH2JBFgyzhuQYp3ynWXTowHH_91EVtN-MXKm8bwUd39N6lFqJfRky4bTqHbStwccQXjaJBcseeXv5pvs29_PyE5Qwwy4yLkiNz26AM\n"
+    },
+    {
+      "key": "kat-a",
+      "message_hex": "61616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161",
+      "name": "kat-a-a1000",
+      "sig": "SIG:AXUAi4e9PzhuQYp3yi7Sozkuy3Zjuexj2qa2fVesXzl_KekNZbiSS5DGCpi-4x5RnfU5C2vxTzAimGcRnytuXI22820c_eBELBMxRAQ\n"
+    },
+    {
+      "key": "kat-a",
+      "message_hex": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e7f808182838485868788898a8b8c8d8e8f909192939495969798999a9b9c9d9e9fa0a1a2a3a4a5a6a7a8a9aaabacadaeafb0b1b2b3b4b5b6b7b8b9babbbcbdbebfc0c1c2c3c4c5c6c7c8c9cacbcccdcecfd0d1d2d3d4d5d6d7d8d9dadbdcdddedfe0e1e2e3e4e5e6e7e8e9eaebecedeeeff0f1f2f3f4f5f6f7f8f9fa000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e7f808182838485868788898a8b8c8d8e8f909192939495969798999a9b9c9d9e9fa0a1a2a3a4a5a6a7a8a9aaabacadaeafb0b1b2b3b4b5b6b7b8b9babbbcbdbebfc0c1c2c3c4c5c6c7c8c9cacbcccdcecfd0d1d2d3d4d5d6d7d8d9dadbdcdddedfe0e1e2e3e4e5e6e7e8e9eaebecedeeeff0f1f2f3f4f5f6f7f8f9fa000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e7f808182838485868788898a8b8c8d8e8f909192939495969798999a9b9c9d9e9fa0a1a2a3a4a5a6a7a8a9aaabacadaeafb0b1b2b3b4b5b6b7b8b9babbbcbdbebfc0c1c2c3c4c5c6c7c8c9cacbcccdcecfd0d1d2d3d4d5d6d7d8d9dadbdcdddedfe0e1e2e3e4e5e6e7e8e9eaebecedeeeff0f1f2f3f4f5f6f7f8f9fa000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e7f808182838485868788898a8b8c8d8e8f909192939495969798999a9b9c9d9e9fa0a1a2a3a4a5a6a7a8a9aaabacadaeafb0b1b2b3b4b5b6b7b8b9babbbcbdbebfc0c1c2c3c4c5c6c7c8c9cacbcccdcecfd0d1d2d3d4d5d6d7d8d9dadbdcdddedfe0e1e2e3e4e5e6e7e8e9eaebecedeeeff0f1f2f3f4f5f6f7f8f9fa000102030405060708090a0b0c0d0e0f10111213",
+      "name": "kat-a-pattern1024",
+      "sig": "SIG:ATZFLi7SajhuQYp3yqCGbIqjqzb2OcU4fIOjAV5WkiYQxYWnlv_8Nux85z6QqptPO7V5vLRIdwZ9d2C2kMvqHu2Ge6LrOUaV8tSgdwI\n"
+    },
+    {
+      "key": "kat-b",
+      "message_hex": "",
+      "name": "kat-b-empty",
+      "sig": "SIG:AUbeg7fq5CH-Md-hVAXBllQ_4aG0Rb2U92fyhAQlQdghygYCZ9uAFFwkQR-fqPdgBEweWqmP9y4pyiM09yGJ0rp42yKgVoPaupytPQc\n"
+    },
+    {
+      "key": "kat-b",
+      "message_hex": "616263",
+      "name": "kat-b-abc",
+      "sig": "SIG:AfBGKNIGgyH-Md-hVOlRFMI0ocn8vzaWkM9tFzPCXKx_plU0WJv4-eiGoBqFcMORorY2fj9vitrhM2-aEsvJY_vp3Epv-fI0YmvwoAI\n"
+    },
+    {
+      "key": "kat-b",
+      "message_hex": "61616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161",
+      "name": "kat-b-a1000",
+      "sig": "SIG:Aa29N9ndoyH-Md-hVFIJ0CVHAQ8J4zGWkMWSgWgvfpqx7MGJmlWd42snehizay2ZboYqEK0hInsJiLhTfRR7u1n3I1TAHBCkGSHKdQ0\n"
+    },
+    {
+      "key": "kat-b",
+      "message_hex": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e7f808182838485868788898a8b8c8d8e8f909192939495969798999a9b9c9d9e9fa0a1a2a3a4a5a6a7a8a9aaabacadaeafb0b1b2b3b4b5b6b7b8b9babbbcbdbebfc0c1c2c3c4c5c6c7c8c9cacbcccdcecfd0d1d2d3d4d5d6d7d8d9dadbdcdddedfe0e1e2e3e4e5e6e7e8e9eaebecedeeeff0f1f2f3f4f5f6f7f8f9fa000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e7f808182838485868788898a8b8c8d8e8f909192939495969798999a9b9c9d9e9fa0a1a2a3a4a5a6a7a8a9aaabacadaeafb0b1b2b3b4b5b6b7b8b9babbbcbdbebfc0c1c2c3c4c5c6c7c8c9cacbcccdcecfd0d1d2d3d4d5d6d7d8d9dadbdcdddedfe0e1e2e3e4e5e6e7e8e9eaebecedeeeff0f1f2f3f4f5f6f7f8f9fa000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e7f808182838485868788898a8b8c8d8e8f909192939495969798999a9b9c9d9e9fa0a1a2a3a4a5a6a7a8a9aaabacadaeafb0b1b2b3b4b5b6b7b8b9babbbcbdbebfc0c1c2c3c4c5c6c7c8c9cacbcccdcecfd0d1d2d3d4d5d6d7d8d9dadbdcdddedfe0e1e2e3e4e5e6e7e8e9eaebecedeeeff0f1f2f3f4f5f6f7f8f9fa000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e7f808182838485868788898a8b8c8d8e8f909192939495969798999a9b9c9d9e9fa0a1a2a3a4a5a6a7a8a9aaabacadaeafb0b1b2b3b4b5b6b7b8b9babbbcbdbebfc0c1c2c3c4c5c6c7c8c9cacbcccdcecfd0d1d2d3d4d5d6d7d8d9dadbdcdddedfe0e1e2e3e4e5e6e7e8e9eaebecedeeeff0f1f2f3f4f5f6f7f8f9fa000102030405060708090a0b0c0d0e0f10111213",
+      "name": "kat-b-pattern1024",
+      "sig": "SIG:AX3I0GqDiCH-Md-hVPmfo7ZFv57tYLYIQ2KCNHKCLyzzdURLfo8cincXoZnyWB-q04U8ZEHtPnM1CXXr9Y7lETEsBGuD7hjM7Oaztgk\n"
+    },
+    {
+      "key": "kat-c",
+      "message_hex": "",
+      "name": "kat-c-empty",
+      "sig": "SIG:Aagv61OmzlZHWqdUYxYRuIL0RgdC8CKiBeMcME0wrUSh2cdLvCit7pLXTpnT7iAkPicNIftJBqiRUe4J9IijjFYfB0GrqVmk8bhf1wA\n"
+    },
+    {
+      "key": "kat-c",
+      "message_hex": "616263",
+      "name": "kat-c-abc",
+      "sig": "SIG:AS0iu-S4YVZHWqdUY1rRUkRqbLBIiFrtLx2xm3zNNPdy4MrMavrSe4wV1_xGAW9B-gd40sL2V3S-vukspnJzBmoW901D9-KG14viwgo\n"
+    },
+    {
+      "key": "kat-c",
+      "message_hex": "61616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161616161",
+      "name": "kat-c-a1000",
+      "sig": "SIG:AUCHslHKL1ZHWqdUY9jwpzazVesovqRd2vnztwLrHKyZL3R2qw26Qke4gw8znQ-2_vKFEGgcwbfVwIzWaGEqGnEPmTZKWpz6dA-mVw0\n"
+    },
+    {
+      "key": "kat-c",
+      "message_hex": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e7f808182838485868788898a8b8c8d8e8f909192939495969798999a9b9c9d9e9fa0a1a2a3a4a5a6a7a8a9aaabacadaeafb0b1b2b3b4b5b6b7b8b9babbbcbdbebfc0c1c2c3c4c5c6c7c8c9cacbcccdcecfd0d1d2d3d4d5d6d7d8d9dadbdcdddedfe0e1e2e3e4e5e6e7e8e9eaebecedeeeff0f1f2f3f4f5f6f7f8f9fa000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e7f808182838485868788898a8b8c8d8e8f909192939495969798999a9b9c9d9e9fa0a1a2a3a4a5a6a7a8a9aaabacadaeafb0b1b2b3b4b5b6b7b8b9babbbcbdbebfc0c1c2c3c4c5c6c7c8c9cacbcccdcecfd0d1d2d3d4d5d6d7d8d9dadbdcdddedfe0e1e2e3e4e5e6e7e8e9eaebecedeeeff0f1f2f3f4f5f6f7f8f9fa000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e7f808182838485868788898a8b8c8d8e8f909192939495969798999a9b9c9d9e9fa0a1a2a3a4a5a6a7a8a9aaabacadaeafb0b1b2b3b4b5b6b7b8b9babbbcbdbebfc0c1c2c3c4c5c6c7c8c9cacbcccdcecfd0d1d2d3d4d5d6d7d8d9dadbdcdddedfe0e1e2e3e4e5e6e7e8e9eaebecedeeeff0f1f2f3f4f5f6f7f8f9fa000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f404142434445464748494a4b4c4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c6d6e6f707172737475767778797a7b7c7d7e7f808182838485868788898a8b8c8d8e8f909192939495969798999a9b9c9d9e9fa0a1a2a3a4a5a6a7a8a9aaabacadaeafb0b1b2b3b4b5b6b7b8b9babbbcbdbebfc0c1c2c3c4c5c6c7c8c9cacbcccdcecfd0d1d2d3d4d5d6d7d8d9dadbdcdddedfe0e1e2e3e4e5e6e7e8e9eaebecedeeeff0f1f2f3f4f5f6f7f8f9fa000102030405060708090a0b0c0d0e0f10111213",
+      "name": "kat-c-pattern1024",
+      "sig": "SIG:ARaNEd85xFZHWqdUYwOme2It6yLYZvJl0vIY0qgx-LizDwcP9W5GcxFB0yGzTds5CkzhAy629c7i7jvh0uQKlEeiPg5VC1hI2UXIogc\n"
+    }
+  ],
+  "spec_version": "1.0.0",
+  "verify_invalid": [
+    {
+      "comment": "signature over the empty message checked against 'abc'",
+      "error": "invalid_signature",
+      "message_hex": "616263",
+      "name": "kat-a-wrong-message",
+      "pub": "PUB:AThuQYp3ygaFaLSZ3PehpV8JlxKE01xFdil1tSfssC93ul3fbzFf\n",
+      "sig": "SIG:AfX-JaGE2ThuQYp3yj5lhD628lINWXhOy0FW3EH4fFxe75_vO5ikhMY1JJdnDiOJoUcg7R5-yD1cRza8jR3g-A6dB1jNUVTQSwaopQk\n"
+    },
+    {
+      "comment": "kat-b signature checked with the kat-a public key",
+      "error": "key_id_mismatch",
+      "message_hex": "",
+      "name": "kat-a-key-id-mismatch",
+      "pub": "PUB:AThuQYp3ygaFaLSZ3PehpV8JlxKE01xFdil1tSfssC93ul3fbzFf\n",
+      "sig": "SIG:AUbeg7fq5CH-Md-hVAXBllQ_4aG0Rb2U92fyhAQlQdghygYCZ9uAFFwkQR-fqPdgBEweWqmP9y4pyiM09yGJ0rp42yKgVoPaupytPQc\n"
+    },
+    {
+      "comment": "one bit of R flipped (Check recomputed)",
+      "error": "invalid_signature",
+      "message_hex": "",
+      "name": "kat-a-flipped-r",
+      "pub": "PUB:AThuQYp3ygaFaLSZ3PehpV8JlxKE01xFdil1tSfssC93ul3fbzFf\n",
+      "sig": "SIG:AUbKguxYSDhuQYp3yj9lhD628lINWXhOy0FW3EH4fFxe75_vO5ikhMY1JJdnDiOJoUcg7R5-yD1cRza8jR3g-A6dB1jNUVTQSwaopQk\n"
+    },
+    {
+      "comment": "S replaced by S + L; verifiers must reject S >= L (Check recomputed)",
+      "error": "invalid_signature",
+      "message_hex": "",
+      "name": "kat-a-noncanonical-s",
+      "pub": "PUB:AThuQYp3ygaFaLSZ3PehpV8JlxKE01xFdil1tSfssC93ul3fbzFf\n",
+      "sig": "SIG:ASjkvsL19DhuQYp3yj5lhD628lINWXhOy0FW3EH4fFxe75_vO5ikhMY1JJdn-_Z-_mGD_3ZUZTX_JTCboh3g-A6dB1jNUVTQSwaopRk\n"
+    }
+  ]
+}
